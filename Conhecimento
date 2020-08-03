@@ -1,0 +1,14 @@
+1-step:
+	1-Criar tela(Home) com caminho pra fazer login.
+	2-Tela home tem que ser simples e funcional.
+2-step:
+	1-Caso não tenha login: abrir uma String onde levara para outra tela(cadastro).
+3-step:
+	1-Na tela de cadastro tem que ter compos: primeiroNome, segundoNome, email, senha.
+	2-Cada campo desse devera mostrar se a campo foi preenchido corretamente
+4-step:
+	1-cada campo tem que ter uma validaçao do tipo: primeiroNome={tem que ter no minimo 3 letrar}.
+5-step:
+	1-ter um botão para verificar tudo que foi feito.
+	2-caso nao tenha feito tudo o programa devera notificar atraves do 'console.log'.
+	
