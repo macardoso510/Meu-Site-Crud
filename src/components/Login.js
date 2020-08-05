@@ -103,7 +103,7 @@ const Login = () => {
             </Grid> */}
             <Grid item>
               <Link href="./Cadastro" variant="body2">
-                {"Don't have an account? Sign Up"}
+                {"Don't have an account? Sign Up. As administrator"}
               </Link>
             </Grid>
           </Grid>

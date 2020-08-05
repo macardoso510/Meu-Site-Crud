@@ -15,27 +15,6 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 
-const emailRegex = RegExp(
-    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-);
-
-const formValid = ({ formErrors, ...rest }) => {
-    let valid = true;
-
-    // validate form errors being empty
-    Object.values(formErrors).forEach(val => {
-        val.length > 0 && (valid = false);
-    });
-
-    // validate the form was filled out
-    Object.values(rest).forEach(val => {
-        val === null && (valid = false);
-    });
-
-    return valid;
-};
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -58,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-
-
 function Cadastro(props) {
     const [form, setState] = useState({
         firstName: null,
@@ -68,20 +44,31 @@ function Cadastro(props) {
         email: null,
         password: null,
         checkPassword: null,
-        formErrors: {
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            checkPassword: "",
-        }
-
     });
 
-    const handlerSubmit = e => {
-        e.preventDefault();
+    const [nameForm, setName] = useState({
+        msgFirstName: "",
+    })
+    const [formLastName, setLast] = useState({
+        msgFirstName: "",
+    })
+    const [formEmail, setEmail] = useState({
+        msgLastName: "",
+    })
+    const [formPassword, setPassword] = useState({
+        msgLastName: "",
+    })
+    const [error, setError] = useState({
+        msg: "",
+    });
 
-        if (formValid(form)) {
+
+    const handlerSubmit = e => {
+        const { name, value } = e.target;
+        e.preventDefault();
+        console.log(form);
+        if (form) {
+
             console.log(`
             --SUBMITTING--
             First Name: ${form.firstName}
@@ -91,25 +78,59 @@ function Cadastro(props) {
             Check Password: ${form.checkPassword}
             `);
         } else {
-            console.error("Algum campo esta em branco");
+            console.error("Algum campo esta vazio");
         }
-
+        // valida se a senha estao iguais
+        if (form.password === form.checkPassword) {
+            setError({
+                hasError: false,
+                msg: ""
+            })
+        } else {
+            setError({
+                hasError: true,
+                msg: "Senhas Diferentes"
+            })
+        }
+        // validaçao do campo "firstName"
+        if (form.firstName == null){
+            setName({
+                name1: true,
+                msgFirstName: "campo incorreto",
+            })
+        } else {
+            setName({
+                name1: false,
+                msgFirstName: "",
+            })
+        }
+        // validaçao do campo "lastName"
+        if(form.lastName === null ){
+            setLast({
+                name2: true,
+                msgLastName: "campo incorreto"
+            })
+        }else {
+            setLast({
+                name2: false,
+                msgLastName: ""
+            })
+        }
 
     }
 
+
+
     const updateField = e => {
+        e.preventDefault();
         setState({
             ...form,
             [e.target.name]: e.target.value
         });
     };
-
-
-
-
-
     const classes = useStyles();
     return (
+
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
@@ -132,6 +153,8 @@ function Cadastro(props) {
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                error={nameForm.name1}
+                                helperText={nameForm.msgFirstName}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -143,7 +166,8 @@ function Cadastro(props) {
                                 id="lastName"
                                 label="Last Name"
                                 name="lastName"
-                                autoComplete="lname"
+                                error={formLastName.name2}
+                                helperText={formLastName.msgLastName}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -182,6 +206,8 @@ function Cadastro(props) {
                                 type="password"
                                 id="checkPassword"
                                 autoComplete="current-password"
+                                error={error.hasError}
+                                helperText={error.msg}
                             />
                         </Grid>
                         {/* <Grid item xs={12}>
