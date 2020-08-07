@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -7,24 +7,30 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
+// import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Cadastro from './Cadastro'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// function Copyright() {
+//   return (
+//     <Typography variant="body2" color="textSecondary" align="center">
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://material-ui.com/">
+//         Your Website
+//       </Link>{' '}
+//       {new Date().getFullYear()}
+//       {'.'}
+//     </Typography>
+//   );
+// }
+// const [logar, setLogar] = useState({
+
+
+// })
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,8 +52,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+function Login(props) {
+
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  })
+
+  const hendlerSubmit = e => {
+    const { name, value } = e.target;
+    e.preventDefault();
+    console.log(`
+    --SUBMITTING--
+    Email: ${form.email}
+    Password: ${form.password}
+    `)
+  }
+
   const classes = useStyles();
+  const updateField = e => {
+    e.preventDefault();
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  };
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,17 +91,20 @@ const Login = () => {
         </Typography>
         <form className={classes.form} noValidate>
           <TextField
+            value={form.email || ''}
+            onChange={updateField}
             variant="outlined"
             margin="normal"
             required
             fullWidth
             id="email"
-            label="Login"
+            label="Email"
             name="email"
-            autoComplete="login"
             autoFocus
           />
           <TextField
+            value={form.password || ''}
+            onChange={updateField}
             variant="outlined"
             margin="normal"
             required
@@ -87,14 +120,16 @@ const Login = () => {
             label="Remember me"
           />
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={hendlerSubmit}
           >
             Sign In
           </Button>
+
           <Grid container>
             {/* <Grid item xs>
               <Link href="#" variant="body2">
@@ -109,9 +144,9 @@ const Login = () => {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
+      {/* <Box mt={8}>
         <Copyright />
-      </Box>
+      </Box> */}
     </Container>
   );
 }

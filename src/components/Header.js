@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login"
+// import Login from "./Login"
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -27,9 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
   const history = useHistory();
   //metodo para entrar no Login.js, atraves de onClick=
-  const entrarLogin = () => {
-    history.replace("/Login");
-  }
+ 
   const handlerLogin = () => {
     history.replace("/Login");
   }
@@ -44,7 +42,7 @@ const Header = () => {
           <Typography variant="h6" className={classes.title}>
             News
             </Typography>
-          <Button color="inherit" onClick={entrarLogin}>Login</Button>
+          <Button color="inherit" onClick={handlerLogin}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
