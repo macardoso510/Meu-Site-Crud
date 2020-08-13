@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './components/Header'
 import Cadastro from './components/Cadastro'
 import Login from './components/Login'
+import Pessoa from './ListaPessoa/Pessoa'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -24,7 +25,7 @@ function App() {
         <Switch>
           <Route path="/Cadastro"><Cadastro /></Route>
           <Route path="/Login"><Login /></Route>
-  
+          <Route path="/Pessoa"><Pessoa /></Route>
 
 
           <Route path="/">
