@@ -16,7 +16,7 @@
 1-git init
 	-rm -rf .git "para remover o git init"
 2-git remote add origin 
-3-git pull origin master
+3-git pull origin masters
 4-git add .
 5-git commit -m “escreva sobre seu projeto aqui”
 6-git push origin master
