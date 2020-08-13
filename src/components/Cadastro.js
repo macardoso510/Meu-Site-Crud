@@ -239,7 +239,7 @@ function Cadastro(props) {
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Link href="./Login" variant="body2">
-                                Alreadyddddddddddssssssss have an account? Sign in
+                                Already have an account? Sign in
                              </Link>
                         </Grid>
                     </Grid>
